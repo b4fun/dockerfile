@@ -1,8 +1,8 @@
 FROM php:7-fpm
 
 # Usable extensions
-RUN apt-get update && apt-get install -y libmcrypt-dev \
-    && docker-php-ext-install mcrypt
+RUN apt-get update && apt-get install -y libmcrypt-dev php-mcrypt \
+    && docker-php-ext-enable mcrypt
 RUN apt-get update && apt-get install -y mysql-client \
     && docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install redis

@@ -3,7 +3,8 @@ FROM php:7.2-fpm
 # Usable extensions
 RUN apt-get update && apt-get install -y mysql-client \
     && docker-php-ext-install pdo_mysql
-RUN docker-php-ext-install redis
+RUN pecl install redis \
+    && docker-php-ext-enable redis
 RUN docker-php-ext-install bcmath
 # NOTE: mcrypt is not provided with the PHP source since 7.2
 # https://stackoverflow.com/a/47673183

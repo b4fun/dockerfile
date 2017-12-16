@@ -1,7 +1,7 @@
 FROM php:7.2-fpm
 
 # Common tools
-RUN apt-get update && apt-get install git zip unzip autoremove
+RUN apt-get update && apt-get install git zip unzip
 
 # Usable extensions
 RUN apt-get update && apt-get install -y libzip-dev \

@@ -1,6 +1,11 @@
 FROM php:7.2-fpm
 
+# Common tools
+RUN apt-get update && apt-get install git zip unzip autoremove
+
 # Usable extensions
+RUN apt-get update && apt-get install -y libzip-dev \
+    && docker-php-ext-install zip
 RUN apt-get update && apt-get install -y mysql-client \
     && docker-php-ext-install pdo_mysql
 RUN pecl install redis \
@@ -19,5 +24,9 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php -r "unlink('composer-setup.php');" \
 RUN /usr/local/bin/composer.phar \
     config -g repo.packagist composer https://packagist.laravel-china.org
+
+# Cleanup
+RUn apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 WORKDIR /var/www

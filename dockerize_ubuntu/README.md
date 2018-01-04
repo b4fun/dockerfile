@@ -5,3 +5,11 @@
 ## tags
 
 - 0.6.0
+
+## usage
+
+```
+FROM b4fun/dockerize-ubuntu as dockerize
+
+COPY --from=dockerize /usr/local/bin/dockerize /usr/local/bin
+```
